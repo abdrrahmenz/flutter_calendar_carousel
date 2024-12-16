@@ -71,6 +71,7 @@ class CalendarCarousel<T extends EventInterface> extends StatefulWidget {
   final TextStyle? selectedDayTextStyle;
   final Color selectedDayButtonColor;
   final Color selectedDayBorderColor;
+  final bool isMultipleMarkedHome;
   final bool? daysHaveCircularBorder;
   final double circularBorderRadius;
   final bool disableDayPressed;
@@ -169,6 +170,7 @@ class CalendarCarousel<T extends EventInterface> extends StatefulWidget {
       this.selectedDayButtonColor = Colors.green,
       this.daysHaveCircularBorder,
       this.circularBorderRadius = 12.0,
+      this.isMultipleMarkedHome = false,
       this.disableDayPressed = false,
       this.onDayPressed,
       this.weekdayTextStyle = const TextStyle(),
@@ -1136,7 +1138,10 @@ class _CalendarState<T extends EventInterface>
     // If day is in multiple selection get its style(if available)
     bool isMultipleMarked = widget.multipleMarkedDates?.isMarked(now) ?? false;
     TextStyle? mutipleMarkedTextStyle =
-        widget.multipleMarkedDates?.getTextStyle(now);
+        widget.multipleMarkedDates?.getTextStyle(
+      now,
+      isMultipleMarkedHome: widget.isMultipleMarkedHome,
+    );
 
     return isSelectedDay && widget.selectedDayTextStyle != null
         ? widget.selectedDayTextStyle

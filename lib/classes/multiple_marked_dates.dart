@@ -1,5 +1,6 @@
-import 'marked_date.dart';
 import 'package:flutter/material.dart';
+
+import 'marked_date.dart';
 
 class MultipleMarkedDates {
   List<MarkedDate> markedDates;
@@ -78,9 +79,11 @@ class MultipleMarkedDates {
     return results.date;
   }
 
-  TextStyle? getTextStyle(DateTime date) {
+  TextStyle? getTextStyle(DateTime date, {bool isMultipleMarkedHome = false}) {
     final results = markedDates.firstWhere((element) => element.date == date,
-        orElse: () => MarkedDate(color: Colors.black, date: DateTime(0)));
+        orElse: () => MarkedDate(
+            color: isMultipleMarkedHome ? Colors.white : Colors.black,
+            date: DateTime(0)));
     return results.textStyle;
   }
 }
