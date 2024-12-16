@@ -79,11 +79,15 @@ class MultipleMarkedDates {
     return results.date;
   }
 
-  TextStyle? getTextStyle(DateTime date, {bool isMultipleMarkedHome = false}) {
-    final results = markedDates.firstWhere((element) => element.date == date,
-        orElse: () => MarkedDate(
-            color: isMultipleMarkedHome ? Colors.white : Colors.black,
-            date: DateTime(0)));
+  TextStyle? getTextStyle(DateTime date, {required bool isMultipleMarkedHome}) {
+    final results = markedDates.firstWhere(
+      (element) => element.date == date,
+      orElse: () => MarkedDate(
+        color: Colors.black,
+        date: DateTime(0),
+        textStyle: isMultipleMarkedHome ? TextStyle(color: Colors.white) : null,
+      ),
+    );
     return results.textStyle;
   }
 }
